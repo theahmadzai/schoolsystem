@@ -15,6 +15,7 @@ int main()
 	char option;
 
 	do {
+		system("Color F9");
 		cout << "------------------------------" << endl;
 		cout << "S - Student Info" << endl;
 		cout << "T - Teacher Teacher Info" << endl;
@@ -24,7 +25,7 @@ int main()
 
 		switch (option) {
 			case 's':
-				do {
+		        do {
 					cout << "------------------------------" << endl;
 					cout << "A - Add Student" << endl;
 					cout << "R - Remove Student" << endl;
@@ -45,11 +46,39 @@ int main()
 						case 'd':
 							c[cn].displayStudent();
 						break;
+						default:
+							cout << "<--------" << endl;
+						break;
 					}
-				} while (option != 'c');
+				} while (option != 'b');
 			break;
 			case 't':
-				cout << 3;
+				do {
+					cout << "------------------------------" << endl;
+					cout << "A - Add Teacher" << endl;
+					cout << "R - Remove Teacher" << endl;
+					cout << "D - Display Teacher" << endl;
+					cout << "------------------------------" << endl;
+
+					cin >> option;
+
+					switch (option) {
+					case 'a':
+						c[cn].addTeacher();
+						break;
+					case 'r':
+						int a;
+						cout << "Enter id: ";  cin >> a;
+						c[cn].removeTeacher(a);
+						break;
+					case 'd':
+						c[cn].displayTeacher();
+						break;
+					default:
+						cout << "<--------" << endl;
+					break;
+					}
+				} while (option != 'b');
 			break;
 		}
 

@@ -14,9 +14,9 @@ private:
 	int fee;
 	int total_fee;
 	int total_students;
-	Student proctor;
+	int total_teachers;
 	Student *students;
-	Teacher teachers;
+	Teacher *teachers;
 
 public:
 	Class();
@@ -24,5 +24,8 @@ public:
 	void addStudent();
 	void removeStudent(int);
 	void displayStudent(int = NULL);
+	void addTeacher();
+	void removeTeacher(int);
+	void displayTeacher(int = NULL);
 };
 
