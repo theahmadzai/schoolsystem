@@ -13,4 +13,3 @@ public:
 	Teacher(int const, int const, string const, string const, string const);
 	~Teacher();
 };
-

@@ -28,4 +28,3 @@ public:
 	void removeTeacher(int);
 	void displayTeacher(int = NULL);
 };
-

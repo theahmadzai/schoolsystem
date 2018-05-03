@@ -4,7 +4,6 @@ Teacher::Teacher()
 {
 }
 
-
 Teacher::Teacher(
 	int const _age,
 	int const _phone,
@@ -15,7 +14,6 @@ Teacher::Teacher(
 	Person(_age, _phone, _name, _father_name, _address)
 {
 }
-
 
 Teacher::~Teacher()
 {

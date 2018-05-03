@@ -3,11 +3,9 @@
 
 int Person::count = 0;
 
-
 Person::Person() : id(++count)
 {
 }
-
 
 Person::Person(
 	int const _age = 0,
@@ -54,7 +52,6 @@ void Person::input()
 	father_name = ::faker(15);
 	address = ::faker(25);
 }
-
 
 void const Person::display()
 {

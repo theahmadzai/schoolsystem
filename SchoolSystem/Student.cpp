@@ -4,7 +4,6 @@ Student::Student()
 {
 }
 
-
 Student::Student(
 	int const _age,
 	int const _phone,
@@ -15,7 +14,6 @@ Student::Student(
 	Person(_age, _phone, _name, _father_name, _address)
 {
 }
-
 
 Student::~Student()
 {

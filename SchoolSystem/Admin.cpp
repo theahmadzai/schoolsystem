@@ -4,7 +4,6 @@ Admin::Admin()
 {
 }
 
-
 Admin::~Admin()
 {
 }
