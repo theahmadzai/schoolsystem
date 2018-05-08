@@ -3,59 +3,95 @@
 
 unsigned int Person::count = 0;
 
-int const Person::getId()
-{
-    return id;
-}
-
-int const Person::getAge()
-{
-    return age;
-}
-
-long long int const Person::getPhone()
-{
-    return phone;
-}
-
-string const Person::getName()
-{
-    return name;
-}
-
-string const Person::getFatherName()
-{
-    return father_name;
-}
-
-string const Person::getAddress()
-{
-    return address;
-}
-
+// Native
 Person::Person() : id(++count)
 {
 }
 
 Person::Person(
-	int const _age = 0,
-	int const _phone = 0,
-	string const _name = NULL,
-	string const _father_name = NULL,
-	string const _address = NULL
-) :
-	id(++count),
-	age(_age),
-	phone(_phone),
-	name(_name),
-	father_name(_father_name),
-	address(_address)
-{
-}
+    int _age = 0,
+    int _phone = 0,
+    string _name = NULL,
+    string _father_name = NULL,
+    string _address = NULL
+):
+    id(++count),
+    age(_age),
+    phone(_phone),
+    name(_name),
+    father_name(_father_name),
+    address(_address)
+{}
 
 Person::~Person()
 {
 }
+
+// Getters
+
+int Person::getId() const
+{
+    return id;
+}
+
+int Person::getAge() const
+{
+    return age;
+}
+
+long long int Person::getPhone() const
+{
+    return phone;
+}
+
+string Person::getName() const
+{
+    return name;
+}
+
+string Person::getFatherName() const
+{
+    return father_name;
+}
+
+string Person::getAddress() const
+{
+    return address;
+}
+
+// Setters
+
+bool Person::setAge(unsigned int _age)
+{
+    age = _age;
+    return (age == _age);
+}
+
+bool Person::setPhone(unsigned long long int _phone)
+{
+    phone = _phone;
+    return (phone == _phone);
+}
+
+bool Person::setName(string _name)
+{
+    name = _name;
+    return (name == _name);
+}
+
+bool Person::setFatherName(string _father_name)
+{
+    father_name = _father_name;
+    return (father_name == _father_name);
+}
+
+bool Person::setAddress(string _address)
+{
+    address = _address;
+    return (address == _address);
+}
+
+// Methods
 
 string faker(int range) {
 	int limit = (rand() % 5 + range);
@@ -78,8 +114,8 @@ void Person::input()
 	address = ::faker(25);
 }
 
-void const Person::display()
+void Person::display() const
 {
-	cout << "| " << id << "\t| " << name << "\t| " << father_name << "\t| " << age << "\t| " << phone << "\t| " << address << "\t|" << endl;
+	cout << "| " << getId() << "\t| " << getName() << "\t| " << getFatherName() << "\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t|" << endl;
 	cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
 }

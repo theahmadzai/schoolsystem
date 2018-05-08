@@ -85,7 +85,6 @@ int main()
 	} while (option != 'c');
 
 
-
 	system("pause");
 	return 0;
 }
