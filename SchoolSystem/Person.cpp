@@ -1,7 +1,37 @@
 #include <iostream>
 #include "Person.h"
 
-int Person::count = 0;
+unsigned int Person::count = 0;
+
+int const Person::getId()
+{
+    return id;
+}
+
+int const Person::getAge()
+{
+    return age;
+}
+
+long long int const Person::getPhone()
+{
+    return phone;
+}
+
+string const Person::getName()
+{
+    return name;
+}
+
+string const Person::getFatherName()
+{
+    return father_name;
+}
+
+string const Person::getAddress()
+{
+    return address;
+}
 
 Person::Person() : id(++count)
 {
@@ -23,7 +53,6 @@ Person::Person(
 {
 }
 
-
 Person::~Person()
 {
 }
@@ -39,10 +68,6 @@ string faker(int range) {
 	return name;
 }
 
-int const Person::getId() 
-{
-	return id;
-}
 
 void Person::input()
 {
