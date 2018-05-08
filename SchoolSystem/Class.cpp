@@ -27,21 +27,21 @@ void Class::addStudent()
 
 void Class::removeStudent(int id)
 {
-	int size = --total_students;
+	int const size = total_students--;
 
-	Student *ns = new Student[size];
+	Student *temp = new Student[size-1];
 
-	for (int i = 0, j = 0; j <= size; i++,j++) {
+	for (int i = 0, j = 0; j < size; i++,j++) {
 		if (students[j].getId() == id) {
-			if (size == j) {
+			if (size-1 == j) {
 				break;
 			}
 			j++;
 		}
-		ns[i] = students[j];
+        temp[i] = students[j];
 	}
 
-	students = ns;
+    students = temp;
 }
 
 void Class::displayStudent(int n)
@@ -55,7 +55,9 @@ void Class::displayStudent(int n)
 		return;
 	}
 
-	for (int i = 0; i < total_students; i++) {
+    int const size = total_students;
+
+	for (int i = 0; i < size; i++) {
 		students[i].display();
 	}
 }
@@ -79,13 +81,13 @@ void Class::addTeacher()
 
 void Class::removeTeacher(int id)
 {
-	int size = --total_teachers;
+	int const size = total_teachers--;
 
-	Teacher *temp = new Teacher[size];
+	Teacher *temp = new Teacher[size-1];
 
-	for (int i = 0, j = 0; j <= size; i++, j++) {
+	for (int i = 0, j = 0; j < size; i++, j++) {
 		if (teachers[j].getId() == id) {
-			if (size == j) {
+			if (size-1 == j) {
 				break;
 			}
 			j++;
