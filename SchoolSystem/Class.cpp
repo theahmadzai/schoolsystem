@@ -12,8 +12,6 @@ void Class::addStudent()
 {
 	Student s;
 
-	s.input();
-
 	int size = ++total_students;
 
 	Student *ns = new Student[size];
@@ -65,8 +63,6 @@ void Class::displayStudent(int n)
 void Class::addTeacher()
 {
 	Teacher t;
-
-	t.input();
 
 	int size = ++total_teachers;
 

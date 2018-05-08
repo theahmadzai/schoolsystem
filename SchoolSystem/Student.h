@@ -4,12 +4,17 @@
 class Student : public Person
 {
 private:
-	int id;
-	int *class_id;
 	int fine;
 
 public:
+    // Native
 	Student();
-	Student(int const, int const, string const, string const, string const);
+    Student(int const, int const, string const, string const, string const);
 	~Student();
+
+    // Getters
+    int getFine() const;
+
+    // Setters
+    bool setFine(unsigned int const);
 };

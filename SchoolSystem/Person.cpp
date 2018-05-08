@@ -4,8 +4,10 @@
 unsigned int Person::count = 0;
 
 // Native
+
 Person::Person() : id(++count)
 {
+    input();
 }
 
 Person::Person(

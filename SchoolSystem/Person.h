@@ -29,11 +29,11 @@ public:
     string getAddress() const;
 
     // Setters
-    bool setAge(const unsigned int);
-    bool setPhone(const unsigned long long int);
-    bool setName(const string);
-    bool setFatherName(const string);
-    bool setAddress(const string);
+    bool setAge(unsigned int const);
+    bool setPhone(unsigned long long int const);
+    bool setName(string const);
+    bool setFatherName(string const);
+    bool setAddress(string const);
 
     // Methods
 	void input();
