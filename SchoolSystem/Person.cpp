@@ -16,7 +16,7 @@ Person::Person(
     string _name = NULL,
     string _father_name = NULL,
     string _address = NULL
-):
+) :
     id(++count),
     age(_age),
     phone(_phone),
@@ -96,28 +96,27 @@ bool Person::setAddress(string _address)
 // Methods
 
 string faker(int range) {
-	int limit = (rand() % 5 + range);
-	char *name = new char[limit];
-	for (int j = 0; j<limit; j++)
-	{
-		name[j] = (char)(rand() % 60 + 60);
-	}
-	name[limit] = NULL;
-	return name;
+    int limit = (rand() % 5 + range);
+    char *name = new char[limit];
+    for (int j = 0; j<limit; j++)
+    {
+        name[j] = (char)(rand() % 10 + 97);
+    }
+    name[limit] = NULL;
+    return name;
 }
-
 
 void Person::input()
 {
-	age = rand() % 30 + 18;
-	phone = rand() % 100 + 300514155;
-	name = ::faker(15);
-	father_name = ::faker(15);
-	address = ::faker(25);
+    age = rand() % 30 + 18;
+    phone = rand() % 100 + 300514155;
+    name = ::faker(15);
+    father_name = ::faker(15);
+    address = ::faker(25);
 }
 
 void Person::display() const
 {
-	cout << "| " << getId() << "\t| " << getName() << "\t| " << getFatherName() << "\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t|" << endl;
-	cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "| " << getId() << "\t| " << getName() << "\t| " << getFatherName() << "\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t|" << endl;
+    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
 }
