@@ -10,21 +10,26 @@ using namespace std;
 class Class
 {
 private:
-	int id;
-	int fee;
-	int total_fee;
-	int total_students;
-	int total_teachers;
-	Student *students;
-	Teacher *teachers;
+    int static total;
+    int id;
+    int fee;
+    int total_fee;
+    int total_students;
+    int total_teachers;
+    Student *students;
+    Teacher *teachers;
 
 public:
-	Class();
-	~Class();
-	void addStudent();
-	void removeStudent(int);
-	void displayStudent(int = NULL);
-	void addTeacher();
-	void removeTeacher(int);
-	void displayTeacher(int = NULL);
+    Class();
+    ~Class();
+    void addStudent();
+    void removeStudent(int);
+    void displayStudent(int = NULL);
+    void addTeacher();
+    void removeTeacher(int);
+    void displayTeacher(int = NULL);
+    void info();
+    int getFee();
+    void setFee(unsigned int);
+    int getTotalFee();
 };
