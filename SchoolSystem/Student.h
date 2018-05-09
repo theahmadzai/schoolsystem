@@ -4,13 +4,13 @@
 class Student : public Person
 {
 private:
-	int fine;
+    int fine;
 
 public:
     // Native
-	Student();
+    Student();
     Student(int const, int const, string const, string const, string const);
-	~Student();
+    ~Student();
 
     // Getters
     int getFine() const;
