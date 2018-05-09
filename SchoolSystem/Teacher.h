@@ -4,14 +4,14 @@
 class Teacher : public Person
 {
 private:
-	int salary;
-	int *classes_id;
+    int salary;
+    int *classes_id;
 
 public:
     // Native
-	Teacher();
-	Teacher(int const, int const, string const, string const, string const);
-	~Teacher();
+    Teacher();
+    Teacher(int const, int const, string const, string const, string const);
+    ~Teacher();
 
     // Getters
     int getSalary() const;

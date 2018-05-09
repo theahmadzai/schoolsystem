@@ -7,13 +7,13 @@ Teacher::Teacher()
 }
 
 Teacher::Teacher(
-	int _age,
-	int _phone,
-	string _name,
-	string _father_name,
-	string _address
-):
-	Person(_age, _phone, _name, _father_name, _address)
+    int _age,
+    int _phone,
+    string _name,
+    string _father_name,
+    string _address
+) :
+    Person(_age, _phone, _name, _father_name, _address)
 {}
 
 Teacher::~Teacher()
