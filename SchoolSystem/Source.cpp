@@ -1,7 +1,4 @@
 #include <iostream>
-#include <string>
-#include "Student.h"
-#include "Teacher.h"
 #include "Class.h"
 #include "Admin.h"
 
@@ -9,7 +6,14 @@ using namespace std;
 
 int main()
 {
-    Class c[10];
+    Admin admin;
+
+    admin.addClass();
+    admin.addClass();
+    admin.listClasses();
+
+
+    /*Class c[10];
     int cn = 1;
 
     char option;
@@ -104,7 +108,7 @@ int main()
         }
 
     } while (option != 'c');
-
+*/
 
     system("pause");
     return 0;
