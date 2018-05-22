@@ -10,8 +10,9 @@ using namespace std;
 class Class
 {
 private:
-    int static total;
+    int static total_classes;
     int id;
+    string name;
     int fee;
     int total_fee;
     int total_students;
@@ -21,6 +22,7 @@ private:
 
 public:
     Class();
+    Class(string, unsigned int);
     ~Class();
     void addStudent();
     void removeStudent(int);
@@ -30,6 +32,8 @@ public:
     void displayTeacher(int = NULL);
     void info();
     int getFee();
+    int getId();
     void setFee(unsigned int);
     int getTotalFee();
+    char panel(char);
 };

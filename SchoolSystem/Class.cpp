@@ -1,8 +1,12 @@
 #include "Class.h"
 
-int Class::total = 0;
+int Class::total_classes = 0;
 
-Class::Class() : total_students(0), total_teachers(0), id(total++), fee(0), total_fee(0)
+Class::Class() : total_students(0), total_teachers(0), id(++total_classes), fee(0), total_fee(0)
+{
+}
+
+Class::Class(string _name, unsigned int _fee) : name(_name), fee(_fee), id(++total_classes)
 {
 }
 
@@ -120,13 +124,8 @@ void Class::displayTeacher(int n)
 
 void Class::info()
 {
-    cout << "---------------------" << endl;
-    cout << "Class: " << id << endl;
-    cout << "Fee: " << fee << endl;
-    cout << "Total Fee: " << total_fee << endl;
-    cout << "Total Students: " << total_students << endl;
-    cout << "Total Teachers: " << total_teachers << endl;
-    cout << "---------------------" << endl;
+    cout << "| " << id << " \t\t| " << name << " \t\t| " << total_students << " \t\t| " << total_teachers << " \t\t| " << fee << " \t\t| " << total_fee << " \t\t|"<< endl;
+    cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
 }
 
 int Class::getFee()
@@ -142,4 +141,30 @@ void Class::setFee(unsigned int _fee)
 int Class::getTotalFee()
 {
     return total_fee;
+}
+
+int Class::getId()
+{
+    return id;
+}
+
+char Class::panel(char ch)
+{
+    cout << endl << endl;
+    cout << "\t\t\t+---------------------------------+" << endl;
+    cout << "\t\t\t|                                 |" << endl;
+    cout << "\t\t\t|       R  -  CLASS INFO          |" << endl;
+    cout << "\t\t\t|       F  -  SET FEE             |" << endl;
+    cout << "\t\t\t|       Q  -  ADD STUDENT         |" << endl;
+    cout << "\t\t\t|       W  -  REMOVE STUDENT      |" << endl;
+    cout << "\t\t\t|       E  -  DISPLAY STUDENTS    |" << endl;
+    cout << "\t\t\t|       A  -  ADD TEACHER         |" << endl;
+    cout << "\t\t\t|       S  -  REMOVE TEACHER      |" << endl;
+    cout << "\t\t\t|       D  -  DISPLAY TEACHERS    |" << endl;
+    cout << "\t\t\t|                                 |" << endl;
+    cout << "\t\t\t+---------------------------------+" << endl;
+    cout << "\t\t\t>> "; cin >> ch;
+
+    system("cls");
+    return ch;
 }

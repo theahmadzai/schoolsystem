@@ -6,109 +6,45 @@ using namespace std;
 
 int main()
 {
+    system("Color F0");
+
     Admin admin;
 
-    admin.addClass();
-    admin.addClass();
-    admin.listClasses();
-
-
-    /*Class c[10];
-    int cn = 1;
-
-    char option;
-
-    do {
-        system("Color F9");
-        cout << "Chose class: "; cin >> cn;
-        cout << "Class Set to: " << cn << endl;
-
-        cout << "------------------------------" << endl;
-        cout << "S - Student Info" << endl;
-        cout << "T - Teacher Teacher Info" << endl;
-        cout << "F - Set Class Fee" << endl;
-        cout << "I - Class Info" << endl;
-        cout << "------------------------------" << endl;
-
-        cin >> option;
-
-        switch (option) {
-        case 'f':
-            int fee;
-            cout << "Enter fee: "; cin >> fee;
-            c[cn].setFee(fee);
+    for (char ch = NULL; ch != 'c' || ch != 'C'; ch = admin.panel(ch))
+    {
+        switch (ch)
+        {
+        case 'a':
+        case 'A':
+            admin.addClass();
             break;
-        case 'i':
-            c[cn].info();
+
+        case 'r':
+        case 'R':
+            admin.removeClass();
             break;
-        case 's':
-            do {
-                system("Color F0");
 
-                cout << "------------------------------" << endl;
-                cout << "A - Add Student" << endl;
-                cout << "R - Remove Student" << endl;
-                cout << "D - Display Students" << endl;
-                cout << "B - Main Menu" << endl;
-                cout << "------------------------------" << endl;
-
-                cin >> option;
-
-                switch (option) {
-                case 'a':
-                    c[cn].addStudent();
-                    break;
-                case 'r':
-                    int id;
-                    cout << "Enter id: ";  cin >> id;
-                    c[cn].removeStudent(id);
-                    break;
-                case 'd':
-                    c[cn].displayStudent();
-                    break;
-                default:
-                    cout << "<--------" << endl;
-                    system("cls");
-                    break;
-                }
-            } while (option != 'b');
+        case 'e':
+        case 'E':
+            admin.enterClass();
             break;
-        case 't':
-            do {
-                system("Color F0");
 
-                cout << "------------------------------" << endl;
-                cout << "A - Add Teacher" << endl;
-                cout << "R - Remove Teacher" << endl;
-                cout << "D - Display Teacher" << endl;
-                cout << "B - Main Menu" << endl;
-                cout << "------------------------------" << endl;
-
-                cin >> option;
-
-                switch (option) {
-                case 'a':
-                    c[cn].addTeacher();
-                    break;
-                case 'r':
-                    int a;
-                    cout << "Enter id: ";  cin >> a;
-                    c[cn].removeTeacher(a);
-                    break;
-                case 'd':
-                    c[cn].displayTeacher();
-                    break;
-                default:
-                    cout << "<--------" << endl;
-                    system("cls");
-                    break;
-                }
-            } while (option != 'b');
+        case 'l':
+        case 'L':
+            admin.listClasses();
             break;
+
+        case 'g':
+        case 'G':
+            admin.listLogs();
+            break;
+
+        default:            
+            if (ch == NULL) continue;         
+            cout << " >> Wrong choice!" << endl;
+            admin.pushLog("Wrong Choice");
         }
-
-    } while (option != 'c');
-*/
+    }
 
     system("pause");
     return 0;
