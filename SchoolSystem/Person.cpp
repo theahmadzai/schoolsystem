@@ -1,35 +1,32 @@
-#include <iostream>
 #include "Person.h"
 
-unsigned int Person::count = 0;
+unsigned int Person::total = 0;
 
-// Native
-
-Person::Person() : id(++count)
-{
-    input();
-}
+Person::Person(): id(++total), age(0), phone(0) {}
 
 Person::Person(
-    int _age = 0,
-    int _phone = 0,
-    string _name = NULL,
-    string _father_name = NULL,
-    string _address = NULL
-) :
-    id(++count),
-    age(_age),
-    phone(_phone),
-    name(_name),
-    father_name(_father_name),
-    address(_address)
-{}
-
-Person::~Person()
+    int _age,
+    int _phone,
+    const char *_name,
+    const char *_father_name,
+    const char *_address
+):
+    id(++total), age(_age), phone(_phone)
 {
+    for (int i = 0; i < 20 || name[i] != NULL; i++) {
+        name[i] = _name[i];
+    }
+
+    for (int i = 0; i < 20 || father_name[i] != NULL; i++) {
+        father_name[i] = _father_name[i];
+    }
+
+    for (int i = 0; i < 30 || address[i] != NULL; i++) {
+        address[i] = _address[i];
+    }
 }
 
-// Getters
+Person::~Person() {}
 
 int Person::getId() const
 {
@@ -46,22 +43,20 @@ long long int Person::getPhone() const
     return phone;
 }
 
-string Person::getName() const
+char* Person::getName()
 {
     return name;
 }
 
-string Person::getFatherName() const
+char* Person::getFatherName()
 {
     return father_name;
 }
 
-string Person::getAddress() const
+char* Person::getAddress()
 {
     return address;
 }
-
-// Setters
 
 bool Person::setAge(unsigned int _age)
 {
@@ -75,48 +70,36 @@ bool Person::setPhone(unsigned long long int _phone)
     return (phone == _phone);
 }
 
-bool Person::setName(string _name)
+bool Person::setName(char _name)
 {
-    name = _name;
-    return (name == _name);
+    *name = _name;
+    return (*name == _name);
 }
 
-bool Person::setFatherName(string _father_name)
+bool Person::setFatherName(char _father_name)
 {
-    father_name = _father_name;
-    return (father_name == _father_name);
+    *father_name = _father_name;
+    return (*father_name == _father_name);
 }
 
-bool Person::setAddress(string _address)
+bool Person::setAddress(char _address)
 {
-    address = _address;
-    return (address == _address);
-}
-
-// Methods
-
-string faker(int range) {
-    int limit = (rand() % 5 + range);
-    char *name = new char[limit];
-    for (int j = 0; j<limit; j++)
-    {
-        name[j] = (char)(rand() % 10 + 97);
-    }
-    name[limit] = NULL;
-    return name;
+    *address = _address;
+    return (*address == _address);
 }
 
 void Person::input()
 {
-    age = rand() % 30 + 18;
-    phone = rand() % 100 + 300514155;
-    name = ::faker(15);
-    father_name = ::faker(15);
-    address = ::faker(25);
+    cout << "Age: "; cin >> age;
+    cout << "Phone: "; cin >> phone;
+    cin.ignore();
+    cout << "Name: "; cin.getline(name, 20);
+    cout << "Father Name: "; cin.getline(father_name, 20);
+    cout << "Address: "; cin.getline(address, 30);
 }
 
-void Person::display() const
+void Person::display()
 {
-    cout << "| " << getId() << "\t| " << getName() << "\t| " << getFatherName() << "\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t|" << endl;
+    cout << "| " << getId() << "\t| " << getName() << "\t\t\t| " << getFatherName() << "\t\t\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t\t\t|" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
 }
