@@ -2,16 +2,79 @@
 
 int Class::total_classes = 0;
 
-Class::Class() : total_students(0), total_teachers(0), id(++total_classes), fee(0), total_fee(0)
-{
-}
+Class::Class() : fee(0), total_fee(0), total_students(0), total_teachers(0) {}
 
-Class::Class(string _name, unsigned int _fee) : name(_name), fee(_fee), id(++total_classes)
+Class::Class(const char *_name, unsigned int _fee) : id(++total_classes), fee(_fee)
 {
+    for (int i = 0; i < 10; i++) {
+        name[i] = _name[i];
+    }
 }
 
 Class::~Class()
 {
+    delete students;
+    delete teachers;
+}
+
+void Class::panel()
+{
+    readDataS();
+    readDataT();
+
+    char ch = NULL;
+    do {
+        cout << endl << endl;
+        cout << "\t\t\t+---------------------------------+---------------------+" << endl;
+        cout << "\t\t\t|                                 |                     |" << endl;
+        cout << "\t\t\t|       OPTIONS                   |  INFO               |" << endl;
+        cout << "\t\t\t|                                 |                     |" << endl;
+        cout << "\t\t\t|       B  -  MAIN MENU           |                     |" << endl;
+        cout << "\t\t\t|       Q  -  ADD STUDENT         |  ID: \t" << id << "\t|" << endl;
+        cout << "\t\t\t|       W  -  REMOVE STUDENT      |  NAME: \t" << name << "\t|" << endl;
+        cout << "\t\t\t|       E  -  DISPLAY STUDENTS    |  FEE: \t" << fee << "\t|" << endl;
+        cout << "\t\t\t|       A  -  ADD TEACHER         |  INCOME: \t" << total_fee << "\t|" << endl;
+        cout << "\t\t\t|       S  -  REMOVE TEACHER      |  STUDENTS: \t" << total_students << "\t|" << endl;
+        cout << "\t\t\t|       D  -  DISPLAY TEACHERS    |  TEACHERS: \t" << total_teachers << "\t|" << endl;
+        cout << "\t\t\t|                                 |                     |" << endl;
+        cout << "\t\t\t+---------------------------------+---------------------+" << endl;
+        cout << "\t\t\t>> "; cin >> ch;
+
+        system("cls");
+
+        switch (ch)
+        {
+        case 'q':
+        case 'Q':
+            addStudent();
+            break;
+        case 'w':
+        case 'W':
+            int sid;
+            cout << "Enter student id:"; cin >> sid;
+            removeStudent(sid);
+            break;
+        case 'e':
+        case 'E':
+            displayStudent();
+            break;
+        case 'a':
+        case 'A':
+            addTeacher();
+            break;
+        case 's':
+        case 'S':
+            int tid;
+            cout << "Enter student id:"; cin >> tid;
+            removeTeacher(tid);
+            break;
+        case 'd':
+        case 'D':
+            displayTeacher();
+            break;
+        }
+
+    } while (ch != 'b' && ch != 'B');
 }
 
 void Class::addStudent()
@@ -19,29 +82,45 @@ void Class::addStudent()
     total_fee += fee;
 
     Student s;
+    s.input();
 
     int size = ++total_students;
 
-    Student *ns = new Student[size];
+    Student *temp = new Student[size];
 
     for (int i = 0; i < size - 1; i++) {
-        ns[i] = students[i];
+        temp[i] = students[i];
     }
 
-    ns[size - 1] = s;
+    temp[size - 1] = s;
 
-    students = ns;
+    students = temp;
+
+    writeData(s);
 }
 
-void Class::removeStudent(int id)
+void Class::removeStudent(unsigned int _id)
 {
-    int const size = total_students--;
+    bool exists = false;
+    int index;
 
-    Student *temp = new Student[size - 1];
+    for (int i = 0; i < total_students; i++) {
+        if (students[i].getId() == _id) {
+            exists = true;
+            index = i;
+        }
+    }
 
-    for (int i = 0, j = 0; j < size; i++, j++) {
-        if (students[j].getId() == id) {
-            if (size - 1 == j) {
+    if (exists == false) {
+        cout << "Students does't exist!" << endl;
+        return;
+    }
+
+    Student *temp = new Student[--total_students];
+
+    for (int i = 0, j = 0; j <= total_students; i++, j++) {
+        if (i == index) {
+            if (j == total_students) {
                 break;
             }
             j++;
@@ -52,14 +131,14 @@ void Class::removeStudent(int id)
     students = temp;
 }
 
-void Class::displayStudent(int n)
+void Class::displayStudent(unsigned int _id)
 {
     cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| ID\t|" << " Name\t\t\t|" << " Father Name\t\t|" << " Age\t|" << " Phone\t\t|" << " Address\t\t\t|" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
 
-    if (n != NULL) {
-        students[n].display();
+    if (_id != NULL) {
+        students[_id].display();
         return;
     }
 
@@ -73,6 +152,7 @@ void Class::displayStudent(int n)
 void Class::addTeacher()
 {
     Teacher t;
+    t.input();
 
     int size = ++total_teachers;
 
@@ -85,17 +165,32 @@ void Class::addTeacher()
     temp[size - 1] = t;
 
     teachers = temp;
+
+    writeData(t);
 }
 
-void Class::removeTeacher(int id)
+void Class::removeTeacher(unsigned int _id)
 {
-    int const size = total_teachers--;
+    bool exists = false;
+    int index;
 
-    Teacher *temp = new Teacher[size - 1];
+    for (int i = 0; i < total_teachers; i++) {
+        if (teachers[i].getId() == _id) {
+            exists = true;
+            index = i;
+        }
+    }
 
-    for (int i = 0, j = 0; j < size; i++, j++) {
-        if (teachers[j].getId() == id) {
-            if (size - 1 == j) {
+    if (exists == false) {
+        cout << "Teacher does't exist!" << endl;
+        return;
+    }
+
+    Teacher *temp = new Teacher[--total_teachers];
+
+    for (int i = 0, j = 0; j <= total_teachers; i++, j++) {
+        if (i == index) {
+            if (j == total_teachers) {
                 break;
             }
             j++;
@@ -106,14 +201,14 @@ void Class::removeTeacher(int id)
     teachers = temp;
 }
 
-void Class::displayTeacher(int n)
+void Class::displayTeacher(unsigned int _id)
 {
     cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
     cout << "| ID\t|" << " Name\t\t\t|" << " Father Name\t\t|" << " Age\t|" << " Phone\t\t|" << " Address\t\t\t|" << endl;
     cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
 
-    if (n != NULL) {
-        teachers[n].display();
+    if (_id != NULL) {
+        teachers[_id].display();
         return;
     }
 
@@ -122,25 +217,9 @@ void Class::displayTeacher(int n)
     }
 }
 
-void Class::info()
+string Class::getName()
 {
-    cout << "| " << id << " \t\t| " << name << " \t\t| " << total_students << " \t\t| " << total_teachers << " \t\t| " << fee << " \t\t| " << total_fee << " \t\t|"<< endl;
-    cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
-}
-
-int Class::getFee()
-{
-    return fee;
-}
-
-void Class::setFee(unsigned int _fee)
-{
-    fee = _fee;
-}
-
-int Class::getTotalFee()
-{
-    return total_fee;
+    return name;
 }
 
 int Class::getId()
@@ -148,23 +227,110 @@ int Class::getId()
     return id;
 }
 
-char Class::panel(char ch)
+int Class::getTotalStudents()
 {
-    cout << endl << endl;
-    cout << "\t\t\t+---------------------------------+" << endl;
-    cout << "\t\t\t|                                 |" << endl;
-    cout << "\t\t\t|       R  -  CLASS INFO          |" << endl;
-    cout << "\t\t\t|       F  -  SET FEE             |" << endl;
-    cout << "\t\t\t|       Q  -  ADD STUDENT         |" << endl;
-    cout << "\t\t\t|       W  -  REMOVE STUDENT      |" << endl;
-    cout << "\t\t\t|       E  -  DISPLAY STUDENTS    |" << endl;
-    cout << "\t\t\t|       A  -  ADD TEACHER         |" << endl;
-    cout << "\t\t\t|       S  -  REMOVE TEACHER      |" << endl;
-    cout << "\t\t\t|       D  -  DISPLAY TEACHERS    |" << endl;
-    cout << "\t\t\t|                                 |" << endl;
-    cout << "\t\t\t+---------------------------------+" << endl;
-    cout << "\t\t\t>> "; cin >> ch;
+    return total_students;
+}
 
-    system("cls");
-    return ch;
+int Class::getTotalTeachers()
+{
+    return total_teachers;
+}
+
+int Class::getFee()
+{
+    return fee;
+}
+
+int Class::getTotalFee()
+{
+    return total_fee;
+}
+
+void Class::setTotalClasses(int n)
+{
+    total_classes = n;
+}
+
+void Class::info()
+{
+    cout << "| " << id << " \t\t| " << name << " \t\t| " << total_students << " \t\t| " << total_teachers << " \t\t| " << fee << " \t\t| " << total_fee << " \t\t|" << endl;
+    cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
+}
+
+template <class T>
+void Class::writeData(T &p)
+{
+    ofstream file;
+
+    string filename = "storage/students_class" + to_string(id) + ".dat";
+
+    if (typeid(p) == typeid(Teacher)) {
+        filename = "storage/teachers_class" + to_string(id) + ".dat";
+    }
+    
+
+    file.open(filename, ios::binary | ios::out | ios::app);
+
+    file.write((char*)&p, sizeof(T));
+
+    file.close();
+}
+
+void Class::readDataS()
+{
+    ifstream file;
+
+    string filename = "storage/students_class" + to_string(id) + ".dat";
+
+    file.open(filename, ios::binary | ios::in);
+
+    if (!file.is_open()) {
+        return;
+    }
+
+    file.seekg(0, ios::end);
+    total_students = file.tellg()/sizeof(Student);
+    file.seekg(ios::beg);
+
+    students = new Student[total_students];
+
+    Student s;
+
+    int i = 0;
+    while (file.read((char*)&s, sizeof(Student))) {
+        students[i] = s;
+        i++;
+    }
+
+    file.close();
+}
+
+void Class::readDataT()
+{
+    ifstream file;
+
+    string filename = "storage/teachers_class" + to_string(id) + ".dat";
+
+    file.open(filename, ios::binary | ios::in);
+
+    if (!file.is_open()) {
+        return;
+    }
+
+    file.seekg(0, ios::end);
+    total_teachers = file.tellg() / sizeof(Teacher);
+    file.seekg(ios::beg);
+
+    teachers = new Teacher[total_teachers];
+
+    Teacher t;
+
+    int i = 0;
+    while (file.read((char*)&t, sizeof(Teacher))) {
+        teachers[i] = t;
+        i++;
+    }
+
+    file.close();
 }
