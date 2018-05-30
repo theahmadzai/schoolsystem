@@ -5,17 +5,16 @@ class Teacher : public Person
 {
 private:
     int salary;
-    int *classes_id;
 
 public:
     // Native
     Teacher();
-    Teacher(int const, int const, string const, string const, string const);
+    Teacher(const int, const int, const char*, const char*, const char*);
     ~Teacher();
 
     // Getters
     int getSalary() const;
 
     // Setters
-    bool setSalary(unsigned int const);
+    bool setSalary(const unsigned int);
 };
