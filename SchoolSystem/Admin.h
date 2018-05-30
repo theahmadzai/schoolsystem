@@ -1,17 +1,17 @@
 #pragma once
-#include <vector>
-#include <time.h>
+#include "Logger.h"
 #include "Class.h"
+
+using namespace std;
 
 class Admin
 {
 private:
 	vector<Class> classes;
-    vector<string> logs;
     Class *current;
+    Logger *logger;
 	int students;
 	int teachers;
-	int income;
 
 public:
     // Native
@@ -19,15 +19,18 @@ public:
 	~Admin();
 
     // Methods
+    void panel();
     void addClass();
     void removeClass();
     void listClasses();
     void enterClass();
-    char panel(char);
-    string getCurrentTime();
+    bool existClass(unsigned int);
+    int getClassIndex(unsigned int);
     int totalClasses();
-    int totalLogs();
-    void pushLog(string);
-    void listLogs();
-    string getLastLog();
+    void notify(string);
+
+    // File Handling
+    void writeData(Class&);
+    void rewriteData();
+    void readData();
 };
