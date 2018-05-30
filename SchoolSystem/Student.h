@@ -9,12 +9,12 @@ private:
 public:
     // Native
     Student();
-    Student(int const, int const, string const, string const, string const);
+    Student(const int, const int, const char*, const char*, const char*);
     ~Student();
 
     // Getters
     int getFine() const;
 
     // Setters
-    bool setFine(unsigned int const);
+    bool setFine(const unsigned int);
 };
