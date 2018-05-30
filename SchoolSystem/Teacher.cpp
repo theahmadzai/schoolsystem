@@ -1,33 +1,23 @@
 #include "Teacher.h"
 
-// Native
-
-Teacher::Teacher()
-{
-}
+Teacher::Teacher(): Person() {}
 
 Teacher::Teacher(
     int _age,
     int _phone,
-    string _name,
-    string _father_name,
-    string _address
-) :
+    const char *_name,
+    const char *_father_name,
+    const char *_address
+):
     Person(_age, _phone, _name, _father_name, _address)
 {}
 
-Teacher::~Teacher()
-{
-}
-
-// Getters
+Teacher::~Teacher() {}
 
 int Teacher::getSalary() const
 {
     return salary;
 }
-
-// Setters
 
 bool Teacher::setSalary(unsigned int _salary)
 {
