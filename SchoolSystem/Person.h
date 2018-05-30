@@ -1,42 +1,42 @@
 #pragma once
-#include <string>
+#include <iostream>
 
 using namespace std;
 
 class Person
 {
 private:
-    static unsigned int count;
+    static unsigned int total;
     unsigned int id;
     unsigned int age;
     unsigned long long int phone;
-    string name;
-    string father_name;
-    string address;
+    char name[20];
+    char father_name[20];
+    char address[30];
 
 public:
     // Native
     Person();
-    Person(int const, int const, string const, string const, string const);
+    Person(const int, const int, const char*, const char*, const char*);
     ~Person();
 
     // Getters
     int getId() const;
     int getAge() const;
     long long int getPhone() const;
-    string getName() const;
-    string getFatherName() const;
-    string getAddress() const;
+    char* getName();
+    char* getFatherName();
+    char* getAddress();
 
     // Setters
-    bool setAge(unsigned int const);
-    bool setPhone(unsigned long long int const);
-    bool setName(string const);
-    bool setFatherName(string const);
-    bool setAddress(string const);
+    bool setAge(const unsigned int);
+    bool setPhone(const unsigned long long int);
+    bool setName(const char);
+    bool setFatherName(const char);
+    bool setAddress(const char);
 
     // Methods
     void input();
-    void display() const;
+    void display();
 };
 
