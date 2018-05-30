@@ -1,9 +1,9 @@
 #pragma once
-#include "Person.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "Teacher.h"
 #include "Student.h"
-#include <iostream>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -12,7 +12,7 @@ class Class
 private:
     int static total_classes;
     int id;
-    string name;
+    char name[10];
     int fee;
     int total_fee;
     int total_students;
@@ -21,19 +21,31 @@ private:
     Teacher *teachers;
 
 public:
+    // Native
     Class();
-    Class(string, unsigned int);
+    Class(const char*, unsigned int);
     ~Class();
+
+    // Methods
+    void panel();
     void addStudent();
-    void removeStudent(int);
-    void displayStudent(int = NULL);
+    void removeStudent(unsigned int = NULL);
+    void displayStudent(unsigned int = NULL);
     void addTeacher();
-    void removeTeacher(int);
-    void displayTeacher(int = NULL);
-    void info();
-    int getFee();
+    void removeTeacher(unsigned int = NULL);
+    void displayTeacher(unsigned int = NULL);
+    string getName();
     int getId();
-    void setFee(unsigned int);
+    int getFee();
     int getTotalFee();
-    char panel(char);
+    int getTotalStudents();
+    int getTotalTeachers();
+    void static setTotalClasses(int);
+    void info();
+
+    // File handling
+    template <class T>
+    void writeData(T&);
+    void readDataS();
+    void readDataT();
 };
