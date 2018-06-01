@@ -2,9 +2,9 @@
 
 int Class::total_classes = 0;
 
-Class::Class() : fee(0), total_fee(0), total_students(0), total_teachers(0) {}
+Class::Class() : fee(0), total_students(0), total_teachers(0) {}
 
-Class::Class(const char *_name, unsigned int _fee) : id(++total_classes), fee(_fee)
+Class::Class(const char *_name, unsigned int _fee) : id(++total_classes), fee(_fee), total_students(0), total_teachers(0)
 {
     for (int i = 0; i < 10; i++) {
         name[i] = _name[i];
@@ -30,12 +30,12 @@ void Class::panel()
         cout << "\t\t\t|       OPTIONS                   |  INFO               |" << endl;
         cout << "\t\t\t|                                 |                     |" << endl;
         cout << "\t\t\t|       B  -  MAIN MENU           |                     |" << endl;
-        cout << "\t\t\t|       Q  -  ADD STUDENT         |  ID: \t" << id << "\t|" << endl;
-        cout << "\t\t\t|       W  -  REMOVE STUDENT      |  NAME: \t" << name << "\t|" << endl;
-        cout << "\t\t\t|       E  -  DISPLAY STUDENTS    |  FEE: \t" << fee << "\t|" << endl;
-        cout << "\t\t\t|       A  -  ADD TEACHER         |  INCOME: \t" << total_fee << "\t|" << endl;
-        cout << "\t\t\t|       S  -  REMOVE TEACHER      |  STUDENTS: \t" << total_students << "\t|" << endl;
-        cout << "\t\t\t|       D  -  DISPLAY TEACHERS    |  TEACHERS: \t" << total_teachers << "\t|" << endl;
+        cout << "\t\t\t|       Q  -  ADD STUDENT         |  ID: \t" << getId() << "\t|" << endl;
+        cout << "\t\t\t|       W  -  REMOVE STUDENT      |  NAME: \t" << getName() << "\t|" << endl;
+        cout << "\t\t\t|       E  -  DISPLAY STUDENTS    |  FEE: \t" << getFee() << "\t|" << endl;
+        cout << "\t\t\t|       A  -  ADD TEACHER         |  INCOME: \t" << getTotalFee() << "\t|" << endl;
+        cout << "\t\t\t|       S  -  REMOVE TEACHER      |  STUDENTS: \t" << getTotalStudents() << "\t|" << endl;
+        cout << "\t\t\t|       D  -  DISPLAY TEACHERS    |  TEACHERS: \t" << getTotalTeachers() << "\t|" << endl;
         cout << "\t\t\t|                                 |                     |" << endl;
         cout << "\t\t\t+---------------------------------+---------------------+" << endl;
         cout << "\t\t\t>> "; cin >> ch;
@@ -79,8 +79,6 @@ void Class::panel()
 
 void Class::addStudent()
 {
-    total_fee += fee;
-
     Student s;
     s.input();
 
@@ -248,18 +246,12 @@ int Class::getFee()
 
 int Class::getTotalFee()
 {
-    return total_fee;
+    return fee*total_students;
 }
 
 void Class::setTotalClasses(int n)
 {
     total_classes = n;
-}
-
-void Class::info()
-{
-    cout << "| " << id << " \t\t| " << name << " \t\t| " << total_students << " \t\t| " << total_teachers << " \t\t| " << fee << " \t\t| " << total_fee << " \t\t|" << endl;
-    cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
 }
 
 template <class T>
