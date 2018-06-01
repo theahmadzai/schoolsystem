@@ -17,4 +17,7 @@ public:
 
     // Setters
     bool setSalary(const unsigned int);
+
+    // Methods
+    void input();
 };

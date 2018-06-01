@@ -24,3 +24,9 @@ bool Teacher::setSalary(unsigned int _salary)
     salary = _salary;
     return (salary == _salary);
 }
+
+void Teacher::input()
+{
+    Person::input();
+    cout << "Salary: "; cin >> salary;
+}
