@@ -30,10 +30,10 @@ public:
     void panel();
     void addStudent();
     void removeStudent(unsigned int = NULL);
-    void displayStudent(unsigned int = NULL);
+    void displayStudent();
     void addTeacher();
     void removeTeacher(unsigned int = NULL);
-    void displayTeacher(unsigned int = NULL);
+    void displayTeacher();
 
     // Getters
     int getId();
