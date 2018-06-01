@@ -22,7 +22,7 @@ void Admin::panel()
         cout << "\t\t\t|       A  -  ADD CLASS           |" << endl;
         cout << "\t\t\t|       R  -  REMOVE CLASS        |" << endl;
         cout << "\t\t\t|       E  -  ENTER CLASS         |" << endl;
-        cout << "\t\t\t|       L  -  LIST CLASSES (" << totalClasses() << ")\t  |" << endl;
+        cout << "\t\t\t|       L  -  LIST CLASSES (" << totalCount() << ")\t  |" << endl;
         cout << "\t\t\t|       G  -  LIST LOGS (" << logger->totalLogs() << ")\t  |" << endl;
         cout << "\t\t\t|                                 |" << endl;
         cout << "\t\t\t+---------------------------------+" << endl;
@@ -36,22 +36,22 @@ void Admin::panel()
         {
         case 'a':
         case 'A':
-            addClass();
+            add();
             break;
 
         case 'r':
         case 'R':
-            removeClass();
+            remove();
             break;
 
         case 'e':
         case 'E':
-            enterClass();
+            enter();
             break;
 
         case 'l':
         case 'L':
-            listClasses();
+            list();
             break;
 
         case 'g':
@@ -68,7 +68,7 @@ void Admin::panel()
     } while (ch != 'c' && ch != 'C');
 }
 
-void Admin::addClass()
+void Admin::add()
 {
     char name[10];
     cout << " >> Enter class name: "; cin >> name;
@@ -83,61 +83,61 @@ void Admin::addClass()
     notify("Added class: " + string(name));
 }
 
-void Admin::removeClass()
+void Admin::remove()
 {
     unsigned int cid;
     cout << "Enter class id to remove: "; cin >> cid;
 
-    if(!existClass(cid)){
+    if(!check(cid)){
         cout << "Class id: [" << cid  << "] not found!" << endl;
         return;
     }
 
-    classes.erase(classes.begin() + getClassIndex(cid));
+    classes.erase(classes.begin() + getIndex(cid));
 
     rewriteData();
 
     notify("Removed class: " + to_string(cid));
 }
 
-void Admin::listClasses()
+void Admin::list()
 {
-    if (totalClasses() < 1) return;
+    if (totalCount() < 1) return;
 
-    notify("Listed classes: " + to_string(totalClasses()));
+    notify("Listed classes: " + to_string(totalCount()));
 
     cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
     cout << "| CLASS         | NAME          | STUDENTS      | TEACHERS      | PER FEE       | TOTAL FEE     |" << endl;
     cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;
-    for (int i = 0; i < totalClasses(); i++) {
+    for (int i = 0; i < totalCount(); i++) {
         cout << "| " << classes[i].getId() << " \t\t| " << classes[i].getName() << " \t\t| " << classes[i].getTotalStudents() << " \t\t| " << classes[i].getTotalTeachers() << " \t\t| " << classes[i].getFee() << " \t\t| " << classes[i].getTotalFee() << " \t\t|" << endl;
     }
     cout << "+---------------+---------------+---------------+---------------+---------------+---------------+" << endl;    
 }
 
-void Admin::enterClass()
+void Admin::enter()
 {
     int cid;
     cout << " >> Class ID: "; cin >> cid;
 
-    if (totalClasses() < 1) {
+    if (totalCount() < 1) {
         cout << "Empty classes!" << endl;
         return;
     }
 
-    if (!existClass(cid)) {
+    if (!check(cid)) {
         cout << "Class id [" << cid << "] not found!" << endl;
         return;
     }
 
-    current = &classes[getClassIndex(cid)];
+    current = &classes[getIndex(cid)];
 
     notify("Entered class: " + to_string(cid));
 
     current->panel();
 }
 
-bool Admin::existClass(unsigned int _id)
+bool Admin::check(unsigned int _id)
 {
     for (int i = 0; i < classes.size(); i++) {
         if (classes[i].getId() == _id) {
@@ -147,7 +147,7 @@ bool Admin::existClass(unsigned int _id)
     return false;
 }
 
-int Admin::getClassIndex(unsigned int _id)
+int Admin::getIndex(unsigned int _id)
 {
     unsigned int index = NULL;
 
@@ -163,7 +163,7 @@ int Admin::getClassIndex(unsigned int _id)
     return index;
 }
 
-int Admin::totalClasses()
+int Admin::totalCount()
 {
     return classes.size();
 }
@@ -194,7 +194,7 @@ void Admin::rewriteData()
     ofstream file;
 
     if (classes.size() == 0) {
-        remove("storage/classes.dat");
+        std::remove("storage/classes.dat");
         return;
     }
 
