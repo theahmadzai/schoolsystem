@@ -11,11 +11,7 @@ Class::Class(const char *_name, unsigned int _fee) : id(++total_classes), fee(_f
     }
 }
 
-Class::~Class()
-{
-    delete students;
-    delete teachers;
-}
+Class::~Class() {}
 
 void Class::panel()
 {
@@ -131,22 +127,20 @@ void Class::removeStudent(unsigned int _id)
     rewriteData(students);
 }
 
-void Class::displayStudent(unsigned int _id)
+void Class::displayStudent()
 {
-    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
-    cout << "| ID\t|" << " Name\t\t\t|" << " Father Name\t\t|" << " Age\t|" << " Phone\t\t|" << " Address\t\t\t|" << endl;
-    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
-
-    if (_id != NULL) {
-        students[_id].display();
-        return;
+    cout << "+-------------------------------------" << endl;
+    cout << "| Total Students: " << getTotalStudents() << endl;
+    for (int i = 0; i < getTotalStudents(); i++) {
+        cout << "+------------------------------------" << endl;
+        cout << "| ID: \t\t\t" << students[i].getId() << endl;
+        cout << "| Name: \t\t" << students[i].getName() << endl;
+        cout << "| Father Name: \t\t" << students[i].getFatherName() << endl;
+        cout << "| Age: \t\t\t" << students[i].getAge() << endl;
+        cout << "| Phone: \t\t" << students[i].getPhone() << endl;
+        cout << "| Address: \t\t" << students[i].getAddress() << endl;
     }
-
-    int const size = total_students;
-
-    for (int i = 0; i < size; i++) {
-        students[i].display();
-    }
+    cout << "+-------------------------------------" << endl;
 }
 
 void Class::addTeacher()
@@ -203,20 +197,21 @@ void Class::removeTeacher(unsigned int _id)
     rewriteData(teachers);
 }
 
-void Class::displayTeacher(unsigned int _id)
+void Class::displayTeacher()
 {
-    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
-    cout << "| ID\t|" << " Name\t\t\t|" << " Father Name\t\t|" << " Age\t|" << " Phone\t\t|" << " Address\t\t\t|" << endl;
-    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
-
-    if (_id != NULL) {
-        teachers[_id].display();
-        return;
+    cout << "+-------------------------------------" << endl;
+    cout << "| Total Students: " << getTotalTeachers() << endl;
+    for (int i = 0; i < getTotalTeachers(); i++) {
+        cout << "+------------------------------------" << endl;
+        cout << "| ID: \t\t\t" << teachers[i].getId() << endl;
+        cout << "| Name: \t\t" << teachers[i].getName() << endl;
+        cout << "| Father Name: \t\t" << teachers[i].getFatherName() << endl;
+        cout << "| Age: \t\t\t" << teachers[i].getAge() << endl;
+        cout << "| Phone: \t\t" << teachers[i].getPhone() << endl;
+        cout << "| Address: \t\t" << teachers[i].getAddress() << endl;
+        cout << "| Salary: \t\t" << teachers[i].getSalary() << endl;
     }
-
-    for (int i = 0; i < total_teachers; i++) {
-        teachers[i].display();
-    }
+    cout << "+-------------------------------------" << endl;
 }
 
 string Class::getName()
