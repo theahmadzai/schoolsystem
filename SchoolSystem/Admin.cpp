@@ -193,6 +193,11 @@ void Admin::rewriteData()
 {
     ofstream file;
 
+    if (classes.size() == 0) {
+        remove("storage/classes.dat");
+        return;
+    }
+
     file.open("storage/classes.dat", ios::binary | ios::out);
 
     for (int i = 0; i < classes.size(); i++) {
