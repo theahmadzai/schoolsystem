@@ -19,8 +19,8 @@ Class::~Class()
 
 void Class::panel()
 {
-    readDataS();
-    readDataT();
+    readData(students);
+    readData(teachers);
 
     char ch = NULL;
     do {
@@ -65,7 +65,7 @@ void Class::panel()
         case 's':
         case 'S':
             int tid;
-            cout << "Enter student id:"; cin >> tid;
+            cout << "Enter Teacher id:"; cin >> tid;
             removeTeacher(tid);
             break;
         case 'd':
@@ -129,6 +129,8 @@ void Class::removeStudent(unsigned int _id)
     }
 
     students = temp;
+
+    rewriteData(students);
 }
 
 void Class::displayStudent(unsigned int _id)
@@ -199,6 +201,8 @@ void Class::removeTeacher(unsigned int _id)
     }
 
     teachers = temp;
+
+    rewriteData(teachers);
 }
 
 void Class::displayTeacher(unsigned int _id)
@@ -268,7 +272,6 @@ void Class::writeData(T &p)
     if (typeid(p) == typeid(Teacher)) {
         filename = "storage/teachers_class" + to_string(id) + ".dat";
     }
-    
 
     file.open(filename, ios::binary | ios::out | ios::app);
 
@@ -277,40 +280,49 @@ void Class::writeData(T &p)
     file.close();
 }
 
-void Class::readDataS()
+template <class T>
+void Class::rewriteData(T &p)
+{
+    ofstream file;
+
+    string filename = "storage/students_class" + to_string(id) + ".dat";
+    int total = total_students;
+
+    if (typeid(T) == typeid(Teacher)) {
+        filename = "storage/teachers_class" + to_string(id) + ".dat";
+        total = total_teachers;
+    }
+
+    if (total == 0) {
+        int l = filename.length();
+        char *f = new char[l];
+        for (int i = 0; i < l; i++) {
+            f[i] = filename[i];
+        }
+        f[l] = NULL;
+        remove(f);
+        return;
+    }
+
+    file.open(filename, ios::binary | ios::out);
+
+    for (int i = 0; i < total; i++) {
+        file.write((char*)&p[i], sizeof(T));
+    }
+    
+    file.close();
+}
+
+template <class T>
+void Class::readData(T *&p)
 {
     ifstream file;
 
     string filename = "storage/students_class" + to_string(id) + ".dat";
 
-    file.open(filename, ios::binary | ios::in);
-
-    if (!file.is_open()) {
-        return;
+    if (typeid(T) == typeid(Teacher)) {
+        filename = "storage/teachers_class" + to_string(id) + ".dat";
     }
-
-    file.seekg(0, ios::end);
-    total_students = file.tellg()/sizeof(Student);
-    file.seekg(ios::beg);
-
-    students = new Student[total_students];
-
-    Student s;
-
-    int i = 0;
-    while (file.read((char*)&s, sizeof(Student))) {
-        students[i] = s;
-        i++;
-    }
-
-    file.close();
-}
-
-void Class::readDataT()
-{
-    ifstream file;
-
-    string filename = "storage/teachers_class" + to_string(id) + ".dat";
 
     file.open(filename, ios::binary | ios::in);
 
@@ -319,18 +331,26 @@ void Class::readDataT()
     }
 
     file.seekg(0, ios::end);
-    total_teachers = file.tellg() / sizeof(Teacher);
+    int total = file.tellg() / sizeof(T);
     file.seekg(ios::beg);
 
-    teachers = new Teacher[total_teachers];
+    if (typeid(*p) == typeid(Student)) {
+        total_students = total;
+    }
+    else {
+        total_teachers = total;
+    }
 
-    Teacher t;
+    p = new T[total];
+
+    T *temp = new T;
 
     int i = 0;
-    while (file.read((char*)&t, sizeof(Teacher))) {
-        teachers[i] = t;
+    while (file.read((char*)temp, sizeof(T))) {
+        p[i] = *temp;
         i++;
     }
 
+    delete temp;
     file.close();
 }
