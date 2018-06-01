@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 #include "Teacher.h"
 #include "Student.h"
 
@@ -46,6 +47,8 @@ public:
     // File handling
     template <class T>
     void writeData(T&);
-    void readDataS();
-    void readDataT();
+    template <class T>
+    void rewriteData(T&);
+    template <class T>
+    void readData(T*&);
 };
