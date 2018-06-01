@@ -37,6 +37,5 @@ public:
 
     // Methods
     void input();
-    void display();
 };
 
