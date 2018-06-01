@@ -97,9 +97,3 @@ void Person::input()
     cout << "Father Name: "; cin.getline(father_name, 20);
     cout << "Address: "; cin.getline(address, 30);
 }
-
-void Person::display()
-{
-    cout << "| " << getId() << "\t| " << getName() << "\t\t\t| " << getFatherName() << "\t\t\t| " << getAge() << "\t| " << getPhone() << "\t| " << getAddress() << "\t\t\t|" << endl;
-    cout << "-----------------------------------------------------------------------------------------------------------------" << endl;
-}
