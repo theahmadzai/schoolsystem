@@ -10,8 +10,6 @@ private:
 	vector<Class> classes;
     Class *current;
     Logger *logger;
-	int students;
-	int teachers;
 
 public:
     // Native
@@ -20,13 +18,13 @@ public:
 
     // Methods
     void panel();
-    void addClass();
-    void removeClass();
-    void listClasses();
-    void enterClass();
-    bool existClass(unsigned int);
-    int getClassIndex(unsigned int);
-    int totalClasses();
+    void add();
+    void remove();
+    void list();
+    void enter();
+    bool check(unsigned int);
+    int getIndex(unsigned int);
+    int totalCount();
     void notify(string);
 
     // File Handling
