@@ -13,9 +13,8 @@ class Class
 private:
     int static total_classes;
     int id;
-    char name[10];
     int fee;
-    int total_fee;
+    char name[10];    
     int total_students;
     int total_teachers;
     Student *students;
@@ -35,14 +34,17 @@ public:
     void addTeacher();
     void removeTeacher(unsigned int = NULL);
     void displayTeacher(unsigned int = NULL);
-    string getName();
+
+    // Getters
     int getId();
     int getFee();
     int getTotalFee();
     int getTotalStudents();
     int getTotalTeachers();
-    void static setTotalClasses(int);
-    void info();
+    string getName();
+
+    // Setters
+    void static setTotalClasses(int);    
 
     // File handling
     template <class T>
