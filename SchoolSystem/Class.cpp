@@ -275,7 +275,7 @@ void Class::rewriteData(T &p)
     string filename = "storage/students_class" + to_string(id) + ".dat";
     int total = total_students;
 
-    if (typeid(T) == typeid(Teacher)) {
+    if (typeid(*p) == typeid(Teacher)) {
         filename = "storage/teachers_class" + to_string(id) + ".dat";
         total = total_teachers;
     }
@@ -294,7 +294,7 @@ void Class::rewriteData(T &p)
     file.open(filename, ios::binary | ios::out);
 
     for (int i = 0; i < total; i++) {
-        file.write((char*)&p[i], sizeof(T));
+        file.write((char*)&p[i], sizeof(*p));
     }
     
     file.close();
@@ -307,7 +307,7 @@ void Class::readData(T *&p)
 
     string filename = "storage/students_class" + to_string(id) + ".dat";
 
-    if (typeid(T) == typeid(Teacher)) {
+    if (typeid(*p) == typeid(Teacher)) {
         filename = "storage/teachers_class" + to_string(id) + ".dat";
     }
 
